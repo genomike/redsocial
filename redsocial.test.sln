@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.test", "redsocial.test\redsocial.test.csproj", "{94373914-F44E-4C02-9327-75277A098DDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.tests", "redsocial.test\redsocial.tests.csproj", "{94373914-F44E-4C02-9327-75277A098DDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E1DC5BC2-CC75-4DAA-B3C4-D2CBD29296DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{701D8F97-2E87-4DA8-9292-2204F1731EFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.domain", "redsocial.domain\redsocial.domain.csproj", "{6BB83896-FE8C-4072-B48B-85ED67370047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.application", "redsocial.application\redsocial.application.csproj", "{723EA4D2-0A23-4168-9F1C-98AB4123847D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.infraestructure", "redsocial.infraestructure\redsocial.infraestructure.csproj", "{A6CEA413-AFA8-41F1-B040-E04FA28F14B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.api", "redsocial.api\redsocial.api.csproj", "{BDD73A00-72B5-427A-8894-B6A63A404879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +27,31 @@ Global
 		{94373914-F44E-4C02-9327-75277A098DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94373914-F44E-4C02-9327-75277A098DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94373914-F44E-4C02-9327-75277A098DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB83896-FE8C-4072-B48B-85ED67370047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB83896-FE8C-4072-B48B-85ED67370047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB83896-FE8C-4072-B48B-85ED67370047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB83896-FE8C-4072-B48B-85ED67370047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{723EA4D2-0A23-4168-9F1C-98AB4123847D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{723EA4D2-0A23-4168-9F1C-98AB4123847D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{723EA4D2-0A23-4168-9F1C-98AB4123847D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{723EA4D2-0A23-4168-9F1C-98AB4123847D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6CEA413-AFA8-41F1-B040-E04FA28F14B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6CEA413-AFA8-41F1-B040-E04FA28F14B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6CEA413-AFA8-41F1-B040-E04FA28F14B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6CEA413-AFA8-41F1-B040-E04FA28F14B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDD73A00-72B5-427A-8894-B6A63A404879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD73A00-72B5-427A-8894-B6A63A404879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD73A00-72B5-427A-8894-B6A63A404879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD73A00-72B5-427A-8894-B6A63A404879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94373914-F44E-4C02-9327-75277A098DDA} = {701D8F97-2E87-4DA8-9292-2204F1731EFD}
+		{6BB83896-FE8C-4072-B48B-85ED67370047} = {E1DC5BC2-CC75-4DAA-B3C4-D2CBD29296DF}
+		{723EA4D2-0A23-4168-9F1C-98AB4123847D} = {E1DC5BC2-CC75-4DAA-B3C4-D2CBD29296DF}
+		{A6CEA413-AFA8-41F1-B040-E04FA28F14B4} = {E1DC5BC2-CC75-4DAA-B3C4-D2CBD29296DF}
+		{BDD73A00-72B5-427A-8894-B6A63A404879} = {E1DC5BC2-CC75-4DAA-B3C4-D2CBD29296DF}
 	EndGlobalSection
 EndGlobal

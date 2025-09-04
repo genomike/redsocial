@@ -1,4 +1,4 @@
-﻿namespace redsocial.test
+﻿namespace redsocial.test.application
 {
     public class PostServiceTests
     {

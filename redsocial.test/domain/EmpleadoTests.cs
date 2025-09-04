@@ -1,4 +1,4 @@
-namespace redsocial.test
+namespace redsocial.test.domain
 {
     public class EmpleadoTests
     {
