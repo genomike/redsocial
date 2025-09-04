@@ -1,0 +1,14 @@
+@startuml CasosUsoMVP
+!theme plain
+
+actor Empleado
+
+usecase (Crear Post) as UC1
+usecase (Ver Posts) as UC2
+usecase (Dar Like) as UC3
+
+Empleado --> UC1
+Empleado --> UC2  
+Empleado --> UC3
+
+@enduml

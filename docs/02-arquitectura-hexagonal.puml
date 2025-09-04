@@ -1,0 +1,31 @@
+@startuml ArquitecturaHexagonal
+!theme plain
+
+package "API" {
+    class PostController
+    class EmpleadoController
+}
+
+package "Aplicacion" {
+    class PostService
+    class EmpleadoService
+}
+
+package "Dominio" {
+    class Post
+    class Empleado
+}
+
+package "Infraestructura" {
+    class PostRepository
+    class EmpleadoRepository
+}
+
+PostController --> PostService
+EmpleadoController --> EmpleadoService
+PostService --> Post
+EmpleadoService --> Empleado
+PostService --> PostRepository
+EmpleadoService --> EmpleadoRepository
+
+@enduml

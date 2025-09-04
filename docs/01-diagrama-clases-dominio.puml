@@ -1,0 +1,19 @@
+@startuml DiagramaClasesDominio
+!theme plain
+
+class Empleado {
+    - id: string
+    - nombre: string
+    - email: string
+}
+
+class Post {
+    - id: string
+    - autorId: string
+    - contenido: string
+    - likes: int
+}
+
+Empleado ||--o{ Post
+
+@enduml

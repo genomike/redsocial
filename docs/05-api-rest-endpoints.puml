@@ -1,0 +1,19 @@
+@startuml APIRestEndpoints
+!theme plain
+
+package "API Endpoints" {
+    
+    note as N1
+    POST /posts - Crear post
+    GET /posts - Ver posts
+    POST /posts/{id}/like - Dar like
+    end note
+    
+    class PostController {
+        + POST /posts
+        + GET /posts  
+        + POST /posts/{id}/like
+    }
+}
+
+@enduml

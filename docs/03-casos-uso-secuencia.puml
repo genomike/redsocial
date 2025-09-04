@@ -1,0 +1,25 @@
+@startuml CasosUsoSecuencia
+!theme plain
+
+actor Cliente
+participant API
+participant Service
+participant Repository
+
+== Crear Post ==
+Cliente -> API: POST /posts
+API -> Service: crearPost()
+Service -> Repository: guardar()
+Repository --> Service: ok
+Service --> API: post
+API --> Cliente: 201
+
+== Dar Like ==
+Cliente -> API: POST /posts/{id}/like
+API -> Service: darLike()
+Service -> Repository: actualizar()
+Repository --> Service: ok
+Service --> API: ok
+API --> Cliente: 200
+
+@enduml
