@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.test", "redsocial.test.csproj", "{F0ABC652-CABC-432A-B035-54BE864217F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redsocial.test", "redsocial.test\redsocial.test.csproj", "{94373914-F44E-4C02-9327-75277A098DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F0ABC652-CABC-432A-B035-54BE864217F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F0ABC652-CABC-432A-B035-54BE864217F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0ABC652-CABC-432A-B035-54BE864217F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F0ABC652-CABC-432A-B035-54BE864217F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94373914-F44E-4C02-9327-75277A098DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94373914-F44E-4C02-9327-75277A098DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94373914-F44E-4C02-9327-75277A098DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94373914-F44E-4C02-9327-75277A098DDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
