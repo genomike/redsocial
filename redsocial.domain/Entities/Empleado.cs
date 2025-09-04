@@ -8,14 +8,20 @@ namespace RedSocial.Domain.Entities
 
         public Empleado(string id, string name, string email)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
                 throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ArgumentException("El ID no puede estar vacío o contener solo espacios en blanco", nameof(id));
             
-            if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("El nombre no puede estar vac�o", nameof(name));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("El nombre no puede estar vacío o contener solo espacios en blanco", nameof(name));
             
-            if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
-                throw new ArgumentException("Email invalido", nameof(email));
+            if (email == null)
+                throw new ArgumentNullException(nameof(email));
+            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+                throw new ArgumentException("Email inválido", nameof(email));
 
             Id = id;
             Name = name;
@@ -24,7 +30,10 @@ namespace RedSocial.Domain.Entities
 
         private bool IsValidEmail(string email)
         {
-            return email.Contains("@") && email.Contains(".");
+            var trimmedEmail = email.Trim();
+            return trimmedEmail.Contains("@") && 
+                   trimmedEmail.Contains(".") && 
+                   !trimmedEmail.Contains(" ");
         }
     }
 }

@@ -108,5 +108,111 @@ namespace redsocial.test.domain
             // THEN: El número de likes no debe ser negativo
             Assert.True(post.Likes >= 0);
         }
+
+        [Fact]
+        public void CreatePost_WithWhitespaceOnlyContent_ShouldThrowException()
+        {
+            // GIVEN: Contenido que solo contiene espacios en blanco
+            var id = "post-008";
+            var authorId = "emp-001";
+            var content = "   ";
+
+            // WHEN & THEN: Se debe lanzar una excepción
+            Assert.ThrowsAny<ArgumentException>(() => new Post(id, authorId, content));
+        }
+
+        [Fact]
+        public void CreatePost_WithWhitespaceOnlyId_ShouldThrowException()
+        {
+            // GIVEN: Un ID que solo contiene espacios en blanco
+            var id = "   ";
+            var authorId = "emp-001";
+            var content = "Valid content";
+
+            // WHEN & THEN: Se debe lanzar una excepción
+            Assert.ThrowsAny<ArgumentException>(() => new Post(id, authorId, content));
+        }
+
+        [Fact]
+        public void CreatePost_WithWhitespaceOnlyAuthorId_ShouldThrowException()
+        {
+            // GIVEN: Un authorId que solo contiene espacios en blanco
+            var id = "post-009";
+            var authorId = "   ";
+            var content = "Valid content";
+
+            // WHEN & THEN: Se debe lanzar una excepción
+            Assert.ThrowsAny<ArgumentException>(() => new Post(id, authorId, content));
+        }
+
+        [Fact]
+        public void CreatePost_WithVeryLongContent_ShouldCreateSuccessfully()
+        {
+            // GIVEN: Contenido muy largo pero válido
+            var id = "post-010";
+            var authorId = "emp-001";
+            var content = new string('A', 2000); // Contenido de 2000 caracteres
+
+            // WHEN: Se crea el post
+            var post = new Post(id, authorId, content);
+
+            // THEN: Se debe crear exitosamente
+            Assert.NotNull(post);
+            Assert.Equal(content, post.Content);
+        }
+
+        [Fact]
+        public void AddLike_MultipleTimesSequentially_ShouldIncrementCorrectly()
+        {
+            // GIVEN: Un post existente
+            var post = new Post("post-011", "emp-001", "Content for like testing");
+
+            // WHEN: Se agregan múltiples likes secuencialmente
+            for (int i = 1; i <= 10; i++)
+            {
+                post.AddLike();
+                
+                // THEN: El número de likes debe incrementar correctamente en cada iteración
+                Assert.Equal(i, post.Likes);
+            }
+        }
+
+        [Fact]
+        public void RemoveLike_MultipleTimesSequentially_ShouldDecrementCorrectly()
+        {
+            // GIVEN: Un post con 10 likes
+            var post = new Post("post-012", "emp-001", "Content for like removal testing");
+            for (int i = 0; i < 10; i++)
+            {
+                post.AddLike();
+            }
+
+            // WHEN: Se remueven múltiples likes secuencialmente
+            for (int i = 9; i >= 0; i--)
+            {
+                post.RemoveLike();
+                
+                // THEN: El número de likes debe decrementar correctamente en cada iteración
+                Assert.Equal(i, post.Likes);
+            }
+        }
+
+        [Fact]
+        public void Post_LikesProperty_ShouldBeReadOnly()
+        {
+            // GIVEN: Un post existente
+            var post = new Post("post-013", "emp-001", "Testing likes property");
+
+            // WHEN: Se intenta acceder a la propiedad Likes
+            var likesValue = post.Likes;
+
+            // THEN: La propiedad debe ser accesible pero no debe tener setter público
+            Assert.Equal(0, likesValue);
+            
+            // Verificar que no hay setter público disponible
+            var likesProperty = typeof(Post).GetProperty("Likes");
+            Assert.NotNull(likesProperty);
+            Assert.True(likesProperty!.SetMethod == null || !likesProperty.SetMethod.IsPublic);
+        }
     }
 }

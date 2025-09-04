@@ -9,14 +9,20 @@ namespace RedSocial.Domain.Entities
 
         public Post(string id, string authorId, string content)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
                 throw new ArgumentNullException(nameof(id));
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ArgumentException("El ID no puede estar vacío o contener solo espacios en blanco", nameof(id));
             
-            if (string.IsNullOrEmpty(authorId))
+            if (authorId == null)
                 throw new ArgumentNullException(nameof(authorId));
+            if (string.IsNullOrWhiteSpace(authorId))
+                throw new ArgumentException("El ID del autor no puede estar vacío o contener solo espacios en blanco", nameof(authorId));
             
-            if (string.IsNullOrEmpty(content))
-                throw new ArgumentException("El contenido no puede estar vac�o", nameof(content));
+            if (content == null)
+                throw new ArgumentNullException(nameof(content));
+            if (string.IsNullOrWhiteSpace(content))
+                throw new ArgumentException("El contenido no puede estar vacío o contener solo espacios en blanco", nameof(content));
 
             Id = id;
             AuthorId = authorId;

@@ -66,5 +66,37 @@ namespace redsocial.test.application
             // THEN: Se debe retornar null
             Assert.Null(foundEmpleado);
         }
+
+        [Fact]
+        public async Task GetAllEmpleados_WhenEmpleadosExist_ShouldReturnAllEmpleados()
+        {
+            // GIVEN: Un servicio de empleados con empleados existentes
+            var empleadoService = new EmpleadoService();
+            var empleado1 = await empleadoService.CreateEmpleado("Ana García", "ana@company.com");
+            var empleado2 = await empleadoService.CreateEmpleado("Carlos López", "carlos@company.com");
+
+            // WHEN: Se solicitan todos los empleados
+            var allEmpleados = await empleadoService.GetAllEmpleados();
+
+            // THEN: Se deben retornar todos los empleados creados
+            Assert.NotNull(allEmpleados);
+            Assert.Contains(empleado1, allEmpleados);
+            Assert.Contains(empleado2, allEmpleados);
+            Assert.True(allEmpleados.Count >= 2);
+        }
+
+        [Fact]
+        public async Task GetAllEmpleados_WhenNoEmpleadosExist_ShouldReturnEmptyList()
+        {
+            // GIVEN: Un servicio de empleados sin empleados creados
+            var empleadoService = new EmpleadoService();
+
+            // WHEN: Se solicitan todos los empleados
+            var allEmpleados = await empleadoService.GetAllEmpleados();
+
+            // THEN: Se debe retornar una lista vacía
+            Assert.NotNull(allEmpleados);
+            Assert.Empty(allEmpleados);
+        }
     }
 }

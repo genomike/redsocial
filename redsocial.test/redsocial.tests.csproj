@@ -12,13 +12,17 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\redsocial.api\redsocial.api.csproj" />
     <ProjectReference Include="..\redsocial.application\redsocial.application.csproj" />
     <ProjectReference Include="..\redsocial.domain\redsocial.domain.csproj" />
+    <ProjectReference Include="..\redsocial.infraestructure\redsocial.infraestructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
