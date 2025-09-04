@@ -1,9 +1,11 @@
-﻿namespace redsocial.test.application
+using RedSocial.Application.Services;
+
+namespace redsocial.test.application
 {
     public class PostServiceTests
     {
         [Fact]
-        public void CreatePost_WithValidEmployeeAndContent_ShouldReturnNewPost()
+        public async Task CreatePost_WithValidEmployeeAndContent_ShouldReturnNewPost()
         {
             // GIVEN: Un servicio de posts, un empleado válido y contenido válido
             var postService = new PostService();
@@ -11,7 +13,7 @@
             var content = "This is a test post from the service layer";
 
             // WHEN: Se crea un post a través del servicio
-            var post = postService.CreatePost(employeeId, content);
+            var post = await postService.CreatePost(employeeId, content);
 
             // THEN: Se debe retornar un post válido con los datos correctos
             Assert.NotNull(post);
@@ -22,15 +24,15 @@
         }
 
         [Fact]
-        public void GetAllPosts_WhenPostsExist_ShouldReturnAllPosts()
+        public async Task GetAllPosts_WhenPostsExist_ShouldReturnAllPosts()
         {
             // GIVEN: Un servicio de posts con posts existentes
             var postService = new PostService();
-            var post1 = postService.CreatePost("emp-001", "First post");
-            var post2 = postService.CreatePost("emp-002", "Second post");
+            var post1 = await postService.CreatePost("emp-001", "First post");
+            var post2 = await postService.CreatePost("emp-002", "Second post");
 
             // WHEN: Se solicitan todos los posts
-            var allPosts = postService.GetAllPosts();
+            var allPosts = await postService.GetAllPosts();
 
             // THEN: Se deben retornar todos los posts creados
             Assert.NotNull(allPosts);
@@ -40,13 +42,13 @@
         }
 
         [Fact]
-        public void GetAllPosts_WhenNoPostsExist_ShouldReturnEmptyList()
+        public async Task GetAllPosts_WhenNoPostsExist_ShouldReturnEmptyList()
         {
             // GIVEN: Un servicio de posts sin posts creados
             var postService = new PostService();
 
             // WHEN: Se solicitan todos los posts
-            var allPosts = postService.GetAllPosts();
+            var allPosts = await postService.GetAllPosts();
 
             // THEN: Se debe retornar una lista vacía
             Assert.NotNull(allPosts);
@@ -54,23 +56,23 @@
         }
 
         [Fact]
-        public void AddLikeToPost_WithValidPostId_ShouldIncrementLikes()
+        public async Task AddLikeToPost_WithValidPostId_ShouldIncrementLikes()
         {
             // GIVEN: Un servicio de posts con un post existente
             var postService = new PostService();
-            var post = postService.CreatePost("emp-001", "Post to like");
+            var post = await postService.CreatePost("emp-001", "Post to like");
             var initialLikes = post.Likes;
 
             // WHEN: Se agrega un like al post a través del servicio
-            postService.AddLikeToPost(post.Id);
+            await postService.AddLikeToPost(post.Id);
 
             // THEN: El número de likes del post se debe incrementar
-            var updatedPost = postService.GetPostById(post.Id);
-            Assert.Equal(initialLikes + 1, updatedPost.Likes);
+            var updatedPost = await postService.GetPostById(post.Id);
+            Assert.Equal(initialLikes + 1, updatedPost!.Likes);
         }
 
         [Fact]
-        public void AddLikeToPost_WithInvalidPostId_ShouldThrowException()
+        public async Task AddLikeToPost_WithInvalidPostId_ShouldThrowException()
         {
             // GIVEN: Un servicio de posts y un ID de post inexistente
             var postService = new PostService();
@@ -78,19 +80,20 @@
 
             // WHEN: Se intenta agregar un like a un post inexistente
             // THEN: Se debe lanzar una excepción
-            Assert.Throws<InvalidOperationException>(() => postService.AddLikeToPost(invalidPostId));
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => 
+                await postService.AddLikeToPost(invalidPostId));
         }
 
         [Fact]
-        public void GetPostById_WithValidId_ShouldReturnCorrectPost()
+        public async Task GetPostById_WithValidId_ShouldReturnCorrectPost()
         {
             // GIVEN: Un servicio de posts con un post existente
             var postService = new PostService();
             var expectedContent = "Test post content";
-            var post = postService.CreatePost("emp-001", expectedContent);
+            var post = await postService.CreatePost("emp-001", expectedContent);
 
             // WHEN: Se busca el post por su ID
-            var foundPost = postService.GetPostById(post.Id);
+            var foundPost = await postService.GetPostById(post.Id);
 
             // THEN: Se debe retornar el post correcto
             Assert.NotNull(foundPost);
@@ -99,14 +102,14 @@
         }
 
         [Fact]
-        public void GetPostById_WithInvalidId_ShouldReturnNull()
+        public async Task GetPostById_WithInvalidId_ShouldReturnNull()
         {
             // GIVEN: Un servicio de posts y un ID inexistente
             var postService = new PostService();
             var invalidId = "non-existent-id";
 
             // WHEN: Se busca un post con un ID inexistente
-            var foundPost = postService.GetPostById(invalidId);
+            var foundPost = await postService.GetPostById(invalidId);
 
             // THEN: Se debe retornar null
             Assert.Null(foundPost);

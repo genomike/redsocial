@@ -1,3 +1,5 @@
+using RedSocial.Domain.Entities;
+
 namespace redsocial.test.domain
 {
     public class EmpleadoTests
