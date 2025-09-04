@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\redsocial.application\redsocial.application.csproj" />
+    <ProjectReference Include="..\redsocial.domain\redsocial.domain.csproj" />
+    <ProjectReference Include="..\redsocial.infraestructure\redsocial.infraestructure.csproj" />
+  </ItemGroup>
+
 </Project>
