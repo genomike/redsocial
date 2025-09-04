@@ -6,11 +6,11 @@ namespace RedSocial.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PostsController : ControllerBase
+    public class PostController : ControllerBase
     {
         private readonly PostService _postService;
 
-        public PostsController(PostService postService)
+        public PostController(PostService postService)
         {
             _postService = postService;
         }
@@ -36,6 +36,61 @@ namespace RedSocial.Api.Controllers
                 return CreatedAtAction(nameof(GetPostById), new { id = post.Id }, response);
             }
             catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Crear múltiples posts en batch
+        /// </summary>
+        [HttpPost("batch")]
+        public async Task<ActionResult<List<PostResponse>>> CreatePostsBatch([FromBody] List<CreatePostRequest> requests)
+        {
+            try
+            {
+                var createdPosts = new List<PostResponse>();
+                var errors = new List<string>();
+
+                foreach (var postRequest in requests)
+                {
+                    try
+                    {
+                        var post = await _postService.CreatePost(postRequest.AuthorId, postRequest.Content);
+                        
+                        var response = new PostResponse
+                        {
+                            Id = post.Id,
+                            AuthorId = post.AuthorId,
+                            Content = post.Content,
+                            Likes = post.Likes
+                        };
+
+                        createdPosts.Add(response);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        errors.Add($"Error creando post: {ex.Message}");
+                    }
+                }
+
+                if (errors.Any() && !createdPosts.Any())
+                {
+                    return BadRequest(new { message = "No se pudo crear ningún post", errors });
+                }
+
+                if (errors.Any())
+                {
+                    return Ok(new { 
+                        posts = createdPosts, 
+                        warnings = errors,
+                        message = $"Se crearon {createdPosts.Count} posts con {errors.Count} errores"
+                    });
+                }
+
+                return CreatedAtAction(nameof(GetAllPosts), createdPosts);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
             }

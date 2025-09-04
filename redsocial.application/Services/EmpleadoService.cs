@@ -34,6 +34,11 @@ namespace RedSocial.Application.Services
         {
             return await _empleadoRepository.GetByIdAsync(id);
         }
+
+        public async Task<List<Empleado>> GetAllEmpleados()
+        {
+            return await _empleadoRepository.GetAllAsync();
+        }
     }
 
     // Implementación en memoria para tests
